@@ -1,0 +1,20 @@
+name: Test Student Scripts
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run student script
+        run: |
+          chmod +x student_script.sh
+          ./student_script.sh > output.txt
+
+      - name: Compare output
+        run: |
+          diff output.txt expected_output.txt
