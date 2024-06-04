@@ -17,4 +17,8 @@ jobs:
 
       - name: Compare output
         run: |
-          diff output.txt expected_output.txt
+          if ! diff output.txt expected_output.txt; then
+            echo "Output does not match expected result:"
+            diff output.txt expected_output.txt || true
+            exit 1
+          fi
